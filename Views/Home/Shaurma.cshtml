@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewBag.Title = "Шаурма";
+}
+<style>
+
+    td {
+        font-family: 'Dela Gothic One', cursive;
+        text-align: center;
+        font-size: 30px;
+    }
+    a {
+        color:black;
+    }
+
+    img{
+        border-radius:80px;
+    }
+
+    h1 {
+        text-align:center;
+        color:black;
+        font-size:50px;
+    }
+
+</style>
+<h1>Выберете желаемый продукт</h1><br /><br />
+<table class="table">
+    @{int iteration = 0; }
+    @foreach (var item in Model)
+    {
+        iteration = iteration + 1;
+        if (iteration == 4)
+        {<tr></tr>
+            <td><a asp-action="@item.NameLatin">@item.NameRus  <br /><img src="@Url.Action("RenderImage", new { id = @item.ProductId })" width="200" height="200" /></a></td>
+         iteration = 0;
+        }
+        else
+        {
+            <td><a asp-action="@item.NameLatin">@item.NameRus <br /><img src="@Url.Action("RenderImage", new { id = @item.ProductId })" width="200" height="200" /></a></td>
+        }
+    }
+</table>
